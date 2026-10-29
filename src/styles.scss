@@ -75,6 +75,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.25rem 1rem 5rem; }
 .chips.wrap { flex-wrap: wrap; overflow: visible; }
 /* Menu category bar: sticky, scrolls sideways, arrows appear on the side that has more chips */
 .chip-bar { position: sticky; top: 3.6rem; z-index: 10; background: var(--bg); padding-top: 0.6rem; }
+.chip-bar .chips { scroll-padding-inline: 3.5rem; } /* chips scrolled into view stay clear of the arrows */
 .chip-arrow {
   position: absolute; top: 0.85rem; bottom: 0.75rem; z-index: 1; width: 3.5rem; padding: 0; border: 0;
   display: flex; align-items: center;
