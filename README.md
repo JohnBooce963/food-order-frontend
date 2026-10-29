@@ -2,8 +2,12 @@
 
 Angular 22 client for the Mai Roo food-ordering app. Backend: [FoodService](https://github.com/JohnBooce963/FoodService).
 
-- `/` menu: pick a size, adjust quantities in the cart, place an order with your name
-- `/orders` shop screen: latest orders, refreshes every 10 s, mark orders done
+- `/` landing page: popular dishes, categories, "surprise me" pick
+- `/menu` menu by category with search, cart, place an order with your name (`/menu?cat=แกง` opens a category)
+- `/login` shop login (the backend's `SHOP_PASSWORD`)
+- `/orders` shop screen, login required: pending/done tabs, today's totals, refreshes every 10 s
+
+Dishes without an image show `public/no-image.svg`.
 
 ## Run locally
 

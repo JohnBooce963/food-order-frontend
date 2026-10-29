@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Image not available">
+  <rect width="400" height="300" fill="#f4ede4"/>
+  <g fill="none" stroke="#cbbba7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="200" cy="128" r="58"/>
+    <circle cx="200" cy="128" r="34"/>
+    <path d="M108 76v40a12 12 0 0 0 24 0V76M120 76v104"/>
+    <path d="M292 76c-16 8-20 30-20 50h20M292 76v104"/>
+  </g>
+  <text x="200" y="236" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#a8988a">Image not available</text>
+</svg>
