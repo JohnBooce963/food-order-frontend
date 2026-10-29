@@ -12,5 +12,10 @@ npm install
 npm start    # http://localhost:4200
 ```
 
-Start the backend first (`./mvnw spring-boot:run` in FoodService). The API URL is the `API` constant in
-`src/app/api.ts` (defaults to `http://localhost:8080`); change it when you deploy.
+Start the backend first (`./mvnw spring-boot:run` in FoodService). On `localhost` the app talks to
+`http://localhost:8080`; anywhere else it uses the Railway backend (the `API` constant in `src/app/api.ts`).
+
+## Deploy (Vercel)
+
+`npx vercel --prod` from this folder, or import the repo in Vercel; the Angular preset works as-is.
+`vercel.json` sends deep links like `/orders` to `index.html`.

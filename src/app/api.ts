@@ -1,5 +1,6 @@
-// Backend URL. ponytail: one constant; move to Angular environments once there is a deployed backend too.
-export const API = 'http://localhost:8080';
+// Backend URL: the local dev server, or the Railway deployment everywhere else.
+export const API =
+  location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://foodservice-production-ee0a.up.railway.app';
 
 export type MenuItem = {
   id: string;
