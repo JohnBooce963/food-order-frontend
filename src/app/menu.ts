@@ -1,4 +1,4 @@
-import { Component, computed, input, linkedSignal, signal } from '@angular/core';
+import { afterRenderEffect, Component, computed, ElementRef, input, linkedSignal, signal, viewChild } from '@angular/core';
 import { api, imgFallback, loadMenu, MenuItem, NO_IMAGE, Order } from './api';
 
 type CartLine = { priceId: number; name: string; size: string | null; price: number; qty: number };
@@ -8,6 +8,7 @@ const POPULAR = 'ขายดี';
 
 @Component({
   selector: 'app-menu',
+  host: { '(window:resize)': 'updateArrows()' },
   template: `
     <div class="menu-page">
       <section class="menu-main">
@@ -23,11 +24,23 @@ const POPULAR = 'ขายดี';
           />
         </header>
 
-        <nav class="chips sticky" aria-label="หมวดหมู่">
-          @for (c of tabs(); track c) {
-            <button class="chip" [class.on]="c === active()" (click)="pickTab(c)">{{ c }}</button>
+        <div class="chip-bar">
+          @if (canLeft()) {
+            <button class="chip-arrow left" (click)="scrollChips(-1)" aria-label="เลื่อนหมวดหมู่ไปทางซ้าย">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            </button>
           }
-        </nav>
+          <nav #chips class="chips" aria-label="หมวดหมู่" (scroll)="updateArrows()">
+            @for (c of tabs(); track c) {
+              <button class="chip" [class.on]="c === active()" (click)="pickTab(c)">{{ c }}</button>
+            }
+          </nav>
+          @if (canRight()) {
+            <button class="chip-arrow right" (click)="scrollChips(1)" aria-label="เลื่อนหมวดหมู่ไปทางขวา">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+            </button>
+          }
+        </div>
 
         @if (loadError()) {
           <p class="error">{{ loadError() }}</p>
@@ -184,11 +197,34 @@ export class MenuPage {
     return [...groups].map(([name, items]) => ({ name, items }));
   });
 
+  // Arrows show only when the category bar has more chips off that side.
+  chips = viewChild.required<ElementRef<HTMLElement>>('chips');
+  canLeft = signal(false);
+  canRight = signal(false);
+
   constructor() {
     loadMenu().then(
       (m) => this.menu.set(m),
       (e: Error) => this.loadError.set(e.message),
     );
+    // After the chips render or the tab changes: bring the active chip into view, then re-check the arrows.
+    afterRenderEffect(() => {
+      this.tabs();
+      this.active();
+      this.chips().nativeElement.querySelector('.chip.on')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      this.updateArrows();
+    });
+  }
+
+  updateArrows() {
+    const el = this.chips().nativeElement;
+    this.canLeft.set(el.scrollLeft > 4);
+    this.canRight.set(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  }
+
+  scrollChips(dir: 1 | -1) {
+    const el = this.chips().nativeElement;
+    el.scrollBy({ left: dir * el.clientWidth * 0.7, behavior: 'smooth' });
   }
 
   search(q: string) {
