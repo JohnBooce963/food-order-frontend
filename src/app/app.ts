@@ -7,7 +7,7 @@ import { shopToken } from './api';
   selector: 'app-root',
   template: `
     <header class="top">
-      <a class="brand" routerLink="/"><span aria-hidden="true">🍜</span> Mai Roo</a>
+      <a class="brand" routerLink="/" aria-label="Mai Roo"><span aria-hidden="true">🍜</span> <span class="brand-name">Mai Roo</span></a>
       <nav>
         <a routerLink="/" routerLinkActive="on" [routerLinkActiveOptions]="{ exact: true }">หน้าแรก</a>
         <a routerLink="/menu" routerLinkActive="on">เมนู</a>

@@ -195,8 +195,8 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.25rem 1rem 5rem; }
   }
 }
 @media (max-width: 480px) {
-  .top { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
-  .chip-bar { top: 5.6rem; }
+  .brand-name { display: none; } /* logo only: the name crowded the nav on phones */
+  .brand { font-size: 1.5rem; }
 }
 
 /* Login */
