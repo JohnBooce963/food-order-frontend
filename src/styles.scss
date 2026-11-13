@@ -108,7 +108,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.25rem 1rem 5rem; }
 .dish.link { color: inherit; text-decoration: none; transition: transform 0.15s; }
 .dish.link:hover { transform: translateY(-2px); }
 .dish-img { position: relative; aspect-ratio: 4 / 3; background: #f4ede4; }
-.dish-img img { width: 100%; height: 100%; object-fit: cover; }
+.dish-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .dish-body { padding: 0.75rem; display: grid; gap: 0.6rem; }
 .dish.unavailable .dish-img { filter: grayscale(1); opacity: 0.6; }
 .options { display: flex; flex-wrap: wrap; gap: 0.4rem; }
